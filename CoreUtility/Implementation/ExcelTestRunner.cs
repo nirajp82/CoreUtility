@@ -8,13 +8,13 @@ namespace CoreUtility
     public class ExcelTestRunner
     {
         #region Members
-        private readonly IExcelUtil _excelUtil;
-        private static IEnumerable<KeyValuePair<string, string>> _xlsColumnAndPropertyMap = null;
+        private readonly IExcelProcessor _excelUtil;
+        private static IEnumerable<KeyValuePair<string, string>> _cellPropertyMap = null;
         #endregion
 
 
         #region Constructor
-        public ExcelTestRunner(IExcelUtil excelUtil)
+        public ExcelTestRunner(IExcelProcessor excelUtil)
         {
             _excelUtil = excelUtil;
 
@@ -22,7 +22,7 @@ namespace CoreUtility
 
         static ExcelTestRunner()
         {
-            _xlsColumnAndPropertyMap = new List<KeyValuePair<string, string>>
+            _cellPropertyMap = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("Id", nameof(Employee.Id)),
                 new KeyValuePair<string, string>("Name",nameof(Employee.Name)),
@@ -40,7 +40,7 @@ namespace CoreUtility
             if (File.Exists("Employee.xlsx"))
             {
                 Byte[] fileContent = File.ReadAllBytes("Employee.xlsx");
-                IEnumerable<Employee> employees = _excelUtil.ConvertXlsToEntityList<Employee>(fileContent, _xlsColumnAndPropertyMap);
+                IEnumerable<Employee> employees = _excelUtil.Process<Employee>(fileContent, _cellPropertyMap);
                 foreach (var item in employees)
                 {
                     Console.WriteLine(item.ToString());

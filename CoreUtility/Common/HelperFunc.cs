@@ -10,7 +10,7 @@ namespace CoreUtility
             return !string.IsNullOrWhiteSpace(value) ? value.Trim() : value;
         }
 
-        public static bool DoesStringMatch(string string1, string string2)
+        public static bool IsEqualString(string string1, string string2)
         {
             if (string1 == default && string2 == default)
                 return true;

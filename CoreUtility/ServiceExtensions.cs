@@ -11,7 +11,7 @@ namespace CoreUtility
         public static void ConfigureCoreUtilityServices(this IServiceCollection services)
         {
             services.AddScoped<ExcelTestRunner>();
-            services.AddScoped<IExcelUtil, ExcelUtil>();
+            services.AddScoped<IExcelProcessor, ExcelProcessor>();
         }
     }
 }
