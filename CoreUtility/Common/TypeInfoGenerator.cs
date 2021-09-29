@@ -120,4 +120,53 @@ namespace CoreUtility
             return DataType.Unknown;
         }
     }
+    
+    
+    //Usage
+      public class Customer
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IList<Order> Orders { get; set; }
+        public Boolean IsVipMember { get; set; }
+    }
+
+    public class Order
+    {
+        public Int64 Id { get; set; }
+
+        public DateTime OrderDate{ get; set; }
+
+        public double OrderTotal { get; set; }
+
+        public IEnumerable<Product> Items { get; set; }
+
+        public Address ShippingAddress { get; set; }
+
+        public Address BillingAddress { get; set; }
+    }
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+    }
+
+    public class Address
+    {
+        public int Id { get; set; }
+        public string Street1 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+    }
+      public static void Main()
+        {
+             new TypeInfoGenerator().GetTypeInfo(typeof(Customer), nameof(Customer));
+           
+          }
+    }
 }
+
+
