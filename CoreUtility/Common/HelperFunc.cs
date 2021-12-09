@@ -57,6 +57,34 @@ namespace CoreUtility
             return fields;
             //return value.Split(new[] { separator }, StringSplitOptions.None);
         }
+            
+       static async Task ReadLargeFiles(string inputfile, string destFile)
+        {
+            try
+            {
+                using (var writer = new StreamWriter(destFile))
+                {
+                    using (FileStream fs = File.Open(inputfile, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    using (BufferedStream bs = new BufferedStream(fs))
+                    using (StreamReader sr = new StreamReader(bs))
+                    {
+                        string line;
+                        var cnt = 0;
+                        while ((line = await sr.ReadLineAsync()) != null)
+                        {
+                            writer.WriteLine(line);
+                            cnt++;
+                            if (cnt > 10000)
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         }
     }
 }
