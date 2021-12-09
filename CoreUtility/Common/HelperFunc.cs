@@ -47,6 +47,16 @@ namespace CoreUtility
                     propertyInfo.SetValue(objModel, Convert.ChangeType(value, toType));
                 }
             }
+            
+       public static string[] CSVParser(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
+            var parser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            var fields = parser.Split(value);
+            return fields;
+            //return value.Split(new[] { separator }, StringSplitOptions.None);
+        }
         }
     }
 }
