@@ -85,6 +85,22 @@ namespace CoreUtility
                 Console.WriteLine(ex);
             }
         }
+            
+             /// <summary>
+        /// string createdTimePropName = Util.GetMemberName((BaseDataModel m) => m.CreatedDate);
+        /// </summary>
+        /// <typeparam name="TObject"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static string GetMemberName<TObject, TProperty>(Expression<Func<TObject, TProperty>> expression)
+        {
+            if (expression.Body is MemberExpression member && member.Member != null)
+            {
+                return member.Member.Name;
+            }
+            throw new ArgumentException("Invalid argument");
+        }
         }
     }
 }
